@@ -18,13 +18,14 @@ class Calculator extends React.Component {
     else if (pressedButton === '=') {
       try {
         const evalResult = eval(equation);
-        const result = Number.isInteger(evalResult)? evalResult : evalResult.toFixed(2);
+        const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
         this.setState({result});
       } catch (error) {
         alert('Invalid Mathematical Equation');
 		return this.clear();
       }
     }
+	// If the back arrow is clicked
     else {
       equation = equation.trim();
       equation = equation.substr(0, equation.length - 1);
@@ -32,9 +33,11 @@ class Calculator extends React.Component {
                 
     this.setState({equation: equation});
   }
+  
   clear() {
     this.setState({equation: '', result: 0});
   }
+
   render() {
     return (
       <main className="calculator">
@@ -44,4 +47,5 @@ class Calculator extends React.Component {
     );
   }
 }
+
 export default Calculator;
