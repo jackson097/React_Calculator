@@ -22,6 +22,7 @@ class Calculator extends React.Component {
         this.setState({result});
       } catch (error) {
         alert('Invalid Mathematical Equation');
+		return this.clear();
       }
     }
     else {
