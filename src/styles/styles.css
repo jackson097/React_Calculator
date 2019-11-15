@@ -33,6 +33,13 @@ body {
 	--shadow: rgba(0, 0, 0, .4);
 }
 
+.btn--primary {
+  color: var(--color-tomato);
+}
+.btn--operator {
+  color: var(--color-orange);
+}
+
 .app {
   height: 100vh;
   width: 100%;
@@ -46,8 +53,8 @@ body {
 .calculator {
   height: 80vh;
   width: 25%;
-  box-shadow: 0 2rem 4rem var(--shadow);
   background-color: var(--color-white);
+  box-shadow: 0 2rem 4rem var(--shadow);
 }
 
 .result-screen {

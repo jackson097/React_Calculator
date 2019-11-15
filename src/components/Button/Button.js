@@ -2,10 +2,10 @@ import React from 'react';
 
 const button = (props) => {
   const classes = ['btn'];
-  if (typeof props !== 'undefined' && typeof props.type !== 'undefined')
+if (typeof props !== 'undefined' && typeof props.type !== 'undefined')
     classes.push('btn--' + props.type);
-  return (
-    <button className={classes.join(' ')}>
+return (
+    <button className={classes.join(' ')} onClick={props.onButtonPress}>
       {props.children}
     </button>
   );
