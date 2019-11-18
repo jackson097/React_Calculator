@@ -6,26 +6,37 @@ class Calculator extends React.Component {
 	
   state = {
     equation: '',
-    result: 0
+    result: 0,
+	prevResult: 0
   }
   
   onButtonPress = event => {
+	const MAX_EQUATION_LENGTH = 12;
     let equation = this.state.equation;
     const pressedButton = event.target.innerHTML;
     if (pressedButton === 'C') return this.clear();
-    else if ((pressedButton >= '0' && pressedButton <= '9') || pressedButton === '.') {
-		if (this.state.equation === '') this.setState({result: 0});  /* If a number is clicked and equation is empty, reset results */
-		if (pressedButton === '.' && this.state.equation === '') equation += '0';
-		equation += pressedButton;
+    else if ((pressedButton >= '0' && pressedButton <= '9')) {
+		if (equation.length <= MAX_EQUATION_LENGTH) equation += pressedButton;
+	}
+	else if (pressedButton === '.') {
+		// Determine if a leading 0 should be added or not
+		const lastCharOfEquation = this.state.equation.match(/[0-9]$/);
+		if (this.state.equation === '' || Number.isInteger(parseInt(lastCharOfEquation)) === false 
+			&& this.state.equation.endsWith(".") === false) equation += '0';
+		if (equation.length <= MAX_EQUATION_LENGTH) equation += pressedButton;
 	}
     else if (['+', '-', '*', '/', '%'].indexOf(pressedButton) !== -1) {
-		if (this.state.equation === '')
-			equation += this.state.result + ' ' + pressedButton + ' ';
-		else equation += ' ' + pressedButton + ' ';
+		if (this.state.equation === '') {
+			this.setState({prevResult: this.state.result}); /* Store the result into the prevResult variable */
+			equation += 'ANS ' + pressedButton + ' ';
+		}
+		else 
+			if (equation.length <= MAX_EQUATION_LENGTH)  equation += ' ' + pressedButton + ' ';
 	}
     else if (pressedButton === '=') {
       try {
-        const evalResult = eval(equation);
+		if (equation.includes('ANS')) equation = equation.replace("ANS", this.state.prevResult); /* Replace the word ANS with prevResult value for evaluation */
+		const evalResult = eval(equation);
         const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
 		if (isNaN(result)) throw 'Invalid Mathematical Equation';
 		equation = '';
