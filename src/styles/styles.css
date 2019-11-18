@@ -28,10 +28,10 @@ body {
 }
 
 .btn--primary {
-  color: var(--color-magenta);
+  color: var(--color-purple-transparent);
 }
 .btn--operator {
-  color: var(--color-magenta);
+  color: var(--color-purple-transparent);
 }
 
 .app {
