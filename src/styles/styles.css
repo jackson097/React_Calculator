@@ -22,8 +22,9 @@ body {
 	--color-light-white: #eee;
 	
 	--color-tomato: #d40640;
-	--color-purple-transparent: rgba(88, 24, 69, .9);
 	--color-pink-transparent: rgba(216, 14, 91, .9);
+	--color-purple-transparent: rgba(20,20,200, .6);
+	--color-blue: rgba(20,20,215,.7);
 	
 	--color-orange: #ff3c00;
 	
@@ -34,10 +35,10 @@ body {
 }
 
 .btn--primary {
-  color: var(--color-tomato);
+  color: var(--color-purple-transparent);
 }
 .btn--operator {
-  color: var(--color-orange);
+  color: var(--color-blue);
 }
 
 .app {
@@ -83,7 +84,7 @@ body {
   overflow: hidden;
   white-space: no-wrap;
   color: var(--color-light-white);
-  background-color: var(--color-tomato);
+  background-color: var(--color-purple-transparent);
 }
 
 .keypad__row {
@@ -113,19 +114,19 @@ body {
 }
 .btn:hover {
   color: var(--color-light-white);
-  background-color: var(--color-tomato);
+  background-color: var(--color-purple-transparent);
 }
 .btn:active {
-  transform: scale(.95);
+  transform: scale(.93);
 }
 
 .btn--large {
   width: 50%;
   color: var(--color-white);
-  background-color: var(--color-tomato);
+  background-color: var(--color-purple-transparent);
   transition: all .2s;
 }
 .btn--large:hover {
   background-color: var(--color-white);
-  color: var(--color-tomato);
+  color: var(--color-purple-transparent);
 }
