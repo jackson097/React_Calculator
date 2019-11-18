@@ -43,7 +43,7 @@ body {
 .app {
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(to bottom right, var(--color-pink-transparent), var(--color-purple-transparent)), url(https://i.pinimg.com/originals/91/b5/cd/91b5cdab51e207263169904b227503b4.jpg);
+  background-image: url(https://images7.alphacoders.com/750/750352.jpg);
   background-size: cover;
   display: flex;
   justify-content: center;
