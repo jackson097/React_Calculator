@@ -27,6 +27,7 @@ class Calculator extends React.Component {
       try {
         const evalResult = eval(equation);
         const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
+		if (isNaN(result)) throw 'Invalid Mathematical Equation';
 		equation = '';
         this.setState({result});
 		this.setState({equation});
