@@ -42,6 +42,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  touch-action: manipulation;
 }
 
 .calculator {
@@ -57,6 +59,7 @@ body {
   background-color: var(--color-white);
   box-shadow: 0 2rem 4rem var(--shadow);
   touch-action: manipulation;
+  overflow: hidden;
 }
 
 .result-screen {
@@ -67,6 +70,7 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  touch-action: manipulation;
 }
 
 .computation-screen {
@@ -76,6 +80,7 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  touch-action: manipulation;
 }
 
 .screen {
@@ -86,6 +91,7 @@ body {
   white-space: no-wrap;
   color: var(--color-light-white);
   background-color: var(--color-purple-transparent);
+  touch-action: manipulation;
 }
 
 .keypad__row {

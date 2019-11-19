@@ -15,7 +15,7 @@ class MobileCalculator extends React.Component {
     let equation = this.state.equation;
     const pressedButton = event.target.innerHTML;
     if (pressedButton === 'C') return this.clear();
-    else if ((pressedButton >= '0' && pressedButton <= '9') || pressedButton === 'x' || pressedButton === '÷') {
+    else if (pressedButton >= '0' && pressedButton <= '9') {
 		if (equation.length <= MAX_EQUATION_LENGTH) equation += pressedButton;
 	}
 	else if (pressedButton === '.') {
@@ -25,10 +25,10 @@ class MobileCalculator extends React.Component {
 			&& this.state.equation.endsWith(".") === false) equation += '0';
 		if (equation.length <= MAX_EQUATION_LENGTH) equation += pressedButton;
 	}
-    else if (['+', '-', '*', '/', '%'].indexOf(pressedButton) !== -1) {
-  		if (this.state.equation === '') {
-  			this.setState({prevResult: this.state.result}); /* Store the result into the prevResult variable */
-  			equation += 'ANS ' + pressedButton + ' ';
+    else if (['+', '-', 'x', '÷', '%'].indexOf(pressedButton) !== -1) {
+		if (this.state.equation === '') {
+			this.setState({prevResult: this.state.result}); /* Store the result into the prevResult variable */
+			equation += 'ANS ' + pressedButton + ' ';
 		}
 		else 
 			if (equation.length <= MAX_EQUATION_LENGTH)  equation += ' ' + pressedButton + ' ';
@@ -39,7 +39,7 @@ class MobileCalculator extends React.Component {
 		equation = equation.replace(/x/g, "*") /* Replace on-screen multiplication symbol with correct operator */
 		equation = equation.replace(/÷/g, "/") /* Replace on-screen division symbol with correct operator */
 		const evalResult = eval(equation);
-        const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
+		const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
 		if (isNaN(result)) throw 'Invalid Mathematical Equation';
 		equation = '';
         this.setState({result});
