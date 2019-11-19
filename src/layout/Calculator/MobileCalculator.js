@@ -15,7 +15,7 @@ class MobileCalculator extends React.Component {
     let equation = this.state.equation;
     const pressedButton = event.target.innerHTML;
     if (pressedButton === 'C') return this.clear();
-    else if ((pressedButton >= '0' && pressedButton <= '9') || pressedButton === 'x' || pressedButton === 'รท') {
+    else if ((pressedButton >= '0' && pressedButton <= '9') || pressedButton === 'x' || pressedButton === '÷') {
 		if (equation.length <= MAX_EQUATION_LENGTH) equation += pressedButton;
 	}
 	else if (pressedButton === '.') {
@@ -26,9 +26,9 @@ class MobileCalculator extends React.Component {
 		if (equation.length <= MAX_EQUATION_LENGTH) equation += pressedButton;
 	}
     else if (['+', '-', '*', '/', '%'].indexOf(pressedButton) !== -1) {
-		if (this.state.equation === '') {
-			this.setState({prevResult: this.state.result}); /* Store the result into the prevResult variable */
-			equation += 'ANS ' + pressedButton + ' ';
+  		if (this.state.equation === '') {
+  			this.setState({prevResult: this.state.result}); /* Store the result into the prevResult variable */
+  			equation += 'ANS ' + pressedButton + ' ';
 		}
 		else 
 			if (equation.length <= MAX_EQUATION_LENGTH)  equation += ' ' + pressedButton + ' ';
@@ -37,16 +37,16 @@ class MobileCalculator extends React.Component {
       try {
 		if (equation.includes('ANS')) equation = equation.replace("ANS", this.state.prevResult); /* Replace the word ANS with prevResult value for evaluation */
 		equation = equation.replace(/x/g, "*") /* Replace on-screen multiplication symbol with correct operator */
-		equation = equation.replace(/รท/g, "/") /* Replace on-screen division symbol with correct operator */
+		equation = equation.replace(/÷/g, "/") /* Replace on-screen division symbol with correct operator */
 		const evalResult = eval(equation);
-		const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
+        const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
 		if (isNaN(result)) throw 'Invalid Mathematical Equation';
 		equation = '';
-		this.setState({result});
-		this.setState({equation});
+        this.setState({result});
+    	this.setState({equation});
       } catch (error) {
         alert('Invalid Mathematical Equation');
-		return this.clear();
+		    return this.clear();
       }
     }
 	// If the back arrow is clicked
@@ -62,8 +62,8 @@ class MobileCalculator extends React.Component {
   }
 
   render() {
-	return (
-      <main className="calculator">
+  	return (
+      <main className="mobilecalculator">
         <Screen equation={this.state.equation} result={this.state.result} />
         <Keypad onButtonPress={this.onButtonPress} />
       </main>
