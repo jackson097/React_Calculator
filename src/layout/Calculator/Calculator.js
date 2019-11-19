@@ -11,19 +11,18 @@ class Calculator extends React.Component {
   }
   
   onButtonPress = event => {
-	const MAX_EQUATION_LENGTH = 12;
     let equation = this.state.equation;
     const pressedButton = event.target.innerHTML;
     if (pressedButton === 'C') return this.clear();
     else if (pressedButton >= '0' && pressedButton <= '9') {
-		if (equation.length <= MAX_EQUATION_LENGTH) equation += pressedButton;
+		equation += pressedButton;
 	}
 	else if (pressedButton === '.') {
 		// Determine if a leading 0 should be added or not
 		const lastCharOfEquation = this.state.equation.match(/[0-9]$/);
 		if (this.state.equation === '' || Number.isInteger(parseInt(lastCharOfEquation)) === false 
 			&& this.state.equation.endsWith(".") === false) equation += '0';
-		if (equation.length <= MAX_EQUATION_LENGTH) equation += pressedButton;
+		equation += pressedButton;
 	}
     else if (['+', '-', 'x', '÷', '%'].indexOf(pressedButton) !== -1) {
 		if (this.state.equation === '') {
@@ -31,7 +30,7 @@ class Calculator extends React.Component {
 			equation += 'ANS ' + pressedButton + ' ';
 		}
 		else 
-			if (equation.length <= MAX_EQUATION_LENGTH)  equation += ' ' + pressedButton + ' ';
+			equation += ' ' + pressedButton + ' ';
 	}
     else if (pressedButton === '=') {
       try {
