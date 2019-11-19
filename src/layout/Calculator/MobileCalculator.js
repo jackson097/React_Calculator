@@ -2,7 +2,7 @@ import React from 'react';
 import Screen from './Screen/Screen';
 import Keypad from './Keypad/Keypad';
 
-class Calculator extends React.Component {
+class MobileCalculator extends React.Component {
 	
   state = {
     equation: '',
@@ -11,7 +11,7 @@ class Calculator extends React.Component {
   }
   
   onButtonPress = event => {
-	const MAX_EQUATION_LENGTH = 12;
+	const MAX_EQUATION_LENGTH = 8;
     let equation = this.state.equation;
     const pressedButton = event.target.innerHTML;
     if (pressedButton === 'C') return this.clear();
@@ -26,28 +26,28 @@ class Calculator extends React.Component {
 		if (equation.length <= MAX_EQUATION_LENGTH) equation += pressedButton;
 	}
     else if (['+', '-', '*', '/', '%'].indexOf(pressedButton) !== -1) {
-		if (this.state.equation === '') {
-			this.setState({prevResult: this.state.result}); /* Store the result into the prevResult variable */
-			equation += 'ANS ' + pressedButton + ' ';
+  		if (this.state.equation === '') {
+  			this.setState({prevResult: this.state.result}); /* Store the result into the prevResult variable */
+  			equation += 'ANS ' + pressedButton + ' ';
 		}
 		else 
 			if (equation.length <= MAX_EQUATION_LENGTH)  equation += ' ' + pressedButton + ' ';
 	}
     else if (pressedButton === '=') {
       try {
-		if (equation.includes('ANS')) equation = equation.replace("ANS", this.state.prevResult); /* Replace the word ANS with prevResult value for evaluation */
-		const evalResult = eval(equation);
-        const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
-		if (isNaN(result)) throw 'Invalid Mathematical Equation';
-		equation = '';
-        this.setState({result});
-		this.setState({equation});
+    		if (equation.includes('ANS')) equation = equation.replace("ANS", this.state.prevResult); /* Replace the word ANS with prevResult value for evaluation */
+    		const evalResult = eval(equation);
+            const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
+    		if (isNaN(result)) throw 'Invalid Mathematical Equation';
+    		equation = '';
+            this.setState({result});
+    		this.setState({equation});
       } catch (error) {
         alert('Invalid Mathematical Equation');
-		return this.clear();
+		    return this.clear();
       }
     }
-	// If the back arrow is clicked
+	 // If the back arrow is clicked
     else {
       equation = equation.trim();
       equation = equation.substr(0, equation.length - 1);
@@ -60,8 +60,8 @@ class Calculator extends React.Component {
   }
 
   render() {
-	return (
-      <main className="calculator">
+  	return (
+      <main className="mobilecalculator">
         <Screen equation={this.state.equation} result={this.state.result} />
         <Keypad onButtonPress={this.onButtonPress} />
       </main>
@@ -69,4 +69,4 @@ class Calculator extends React.Component {
   }
 }
 
-export default Calculator;
+export default MobileCalculator;

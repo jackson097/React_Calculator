@@ -51,6 +51,13 @@ body {
   box-shadow: 0 2rem 4rem var(--shadow);
 }
 
+.mobilecalculator {
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-white);
+  box-shadow: 0 2rem 4rem var(--shadow);
+}
+
 .result-screen {
   height: 19vh;
   font-size: 8rem;
