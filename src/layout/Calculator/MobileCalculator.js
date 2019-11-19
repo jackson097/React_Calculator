@@ -36,11 +36,13 @@ class MobileCalculator extends React.Component {
     else if (pressedButton === '=') {
       try {
     		if (equation.includes('ANS')) equation = equation.replace("ANS", this.state.prevResult); /* Replace the word ANS with prevResult value for evaluation */
-    		const evalResult = eval(equation);
-            const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
+        equation = equation.replace(/x/g, "*") /* Replace on-screen multiplication symbol with correct operator */
+        equation = equation.replace(/÷/g, "/") /* Replace on-screen division symbol with correct operator */
+		    const evalResult = eval(equation);
+        const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
     		if (isNaN(result)) throw 'Invalid Mathematical Equation';
     		equation = '';
-            this.setState({result});
+        this.setState({result});
     		this.setState({equation});
       } catch (error) {
         alert('Invalid Mathematical Equation');
